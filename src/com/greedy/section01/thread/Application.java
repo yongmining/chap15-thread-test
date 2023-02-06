@@ -12,6 +12,47 @@ public class Application {
 		 * 스레드를 생성하는 방법
 		 * 1. Thread 클래스를 상속받는 방법
 		 * 2. Runnable 인터페이스를 상속받는 방법 */
+	
+//		Car car = new Car();
+//		Tank tank = new Tank();
+//		Plane plane = new Plane();
+//		
+		/* Thread 타입의 인스턴스로 변환 */
+//		Thread t1 = car;
+//		Thread t2 = tank;
+//		Thread t3 = new Thread(plane);
+		
+		Thread t1 = new Car();
+		Thread t2 = new Tank();
+		Thread t3 = new Thread(new Plane());
+		
+//		t1.run();
+//		t2.run();
+//		t3.run();
+		
+		t1.setPriority(Thread.MAX_PRIORITY); //10
+		t3.setPriority(Thread.MIN_PRIORITY); //1
+		
+		System.out.println("t1의 우선순위 : " + t1.getPriority());
+		System.out.println("t2의 우선순위 : " + t2.getPriority());
+		System.out.println("t3의 우선순위 : " + t3.getPriority());
+		
+		
+		t1.start();
+		t2.start();
+		t3.start();
+		
+		/* 지정한 쓰레드가 종료될 때 까지 현재 쓰레드(메인 쓰레드)를 일시 정지 시킨다. */
+		try {
+			t1.join();
+			t2.join();
+			t3.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("----------------------- main end!!!");
+	
 	}
 
 }
